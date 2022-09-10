@@ -41,10 +41,10 @@
   Section: Macro Declarations
 */
 
-#define USART0_TX_BUFFER_SIZE (8) //buffer size should be 2^n
+#define USART0_TX_BUFFER_SIZE (128) //buffer size should be 2^n
 #define USART0_TX_BUFFER_MASK (USART0_TX_BUFFER_SIZE - 1) 
 
-#define USART0_RX_BUFFER_SIZE (8) //buffer size should be 2^n
+#define USART0_RX_BUFFER_SIZE (128) //buffer size should be 2^n
 #define USART0_RX_BUFFER_MASK (USART0_RX_BUFFER_SIZE - 1)
 
 
