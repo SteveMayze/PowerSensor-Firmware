@@ -33,6 +33,7 @@
 #include "mcc_generated_files/system/system.h"
 #include "INA219.h"
 #include <math.h>
+#include <string.h>
 /*
     Main application
 */
@@ -56,6 +57,7 @@ void write_data(uint8_t *data, uint8_t size){
     }    
 }
 
+#define IN_HEX
 int main(void)
 {
     SYSTEM_Initialize();
@@ -68,10 +70,10 @@ int main(void)
     LED_BLUE_SetHigh();
     
     struct ina219_data readings;
-    uint8_t vshunt[2];
-    uint8_t vbus[2];
-    uint8_t current[2];
-    uint8_t power[2];
+//    uint8_t vshunt[2];
+//    uint8_t vbus[2];
+//    uint8_t current[2];
+//    uint8_t power[2];
     
     while(1)
     {
@@ -84,16 +86,55 @@ int main(void)
                 while(!USART0_IsTxReady()){}
                 USART0_Write(data|0x80);
 
+                char strbuf[20];
+                uint8_t buflen;
                 readings = INA219_getReadings();
-                splitFloat(vshunt, readings.shunt_voltage);
-                splitFloat(vbus, readings.bus_voltage);
-                splitFloat(current, readings.current);
-                splitFloat(power, readings.power);
-                write_data(vbus, 2);
+#ifdef IN_HEX
+                sprintf(strbuf, "%04X", readings.raw_shunt_voltage);
+                buflen = strlen((char *)strbuf);
+                USART0_Write(0x01);
+                write_data((uint8_t *)strbuf, buflen);
+                USART0_Write(0x00);
 
-                float abc = 23.5;
-                splitFloat(vbus, abc);
-                write_data(vbus, 2);
+                sprintf(strbuf, "%04X", readings.raw_bus_voltage);
+                buflen = strlen((char *)strbuf);
+                USART0_Write(0x02);
+                write_data((uint8_t *)strbuf, buflen);
+                USART0_Write(0x00);
+
+                sprintf(strbuf, "%04X", readings.raw_current);
+                buflen = strlen((char *)strbuf);
+                USART0_Write(0x03);
+                write_data((uint8_t *)strbuf, buflen);
+                USART0_Write(0x00);
+#else
+                sprintf(strbuf, "%5.2f", readings.shunt_voltage);
+                buflen = strlen((char *)strbuf);
+                USART0_Write(0x01);
+                write_data((uint8_t *)strbuf, buflen);
+                USART0_Write(0x00);
+
+                sprintf(strbuf, "%5.2f", readings.bus_voltage);
+                buflen = strlen((char *)strbuf);
+                USART0_Write(0x02);
+                write_data((uint8_t *)strbuf, buflen);
+                USART0_Write(0x00);
+
+                sprintf(strbuf, "%5.2f", readings.current);
+                buflen = strlen((char *)strbuf);
+                USART0_Write(0x03);
+                write_data((uint8_t *)strbuf, buflen);
+                USART0_Write(0x00);
+
+                sprintf(strbuf, "%5.2f", readings.power);
+                buflen = strlen((char *)strbuf);
+                USART0_Write(0x04);
+                write_data((uint8_t *)strbuf, buflen);
+                USART0_Write(0x00);
+#endif                
+                USART0_Write(0xFE);
+                
+                
             }
             LED_RED_Toggle();                
             tock = false;
