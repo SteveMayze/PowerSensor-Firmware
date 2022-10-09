@@ -34,12 +34,17 @@
 #include "INA219.h"
 #include <math.h>
 #include <string.h>
+#include "util/delay.h"
 /*
     Main application
 */
 #define INA219_ADDRESS INA219_ADDR_GND_GND
 
 volatile bool tock;
+bool ina219_ok = false;
+ina219_status_t ina219_state;
+char strbuf[128];
+uint8_t buflen;
 
 void tick(){
     tock = true;
@@ -60,81 +65,68 @@ void write_data(uint8_t *data, uint8_t size){
 #define IN_HEX
 int main(void)
 {
+
     SYSTEM_Initialize();
-    INA219_Initialise(INA219_ADDRESS);
+    LED_BLUE_SetLow();    
+    LED_GREEN_SetLow();   
+    
+    _delay_ms(1000);
+    
+    INA219_ERROR_set(INA219_ERROR_NONE);
+    if(INA219_Initialise(INA219_ADDRESS)){
+        ina219_state = INA219_ERROR_get();        
+        LED_BLUE_SetLow();
+        sprintf(strbuf, "INIT OK %0X %s %s\n", ina219_state, INA219_ERROR_get_message(), INA219_ERROR_get_operation());        
+    } else {
+        ina219_state = INA219_ERROR_get();        
+        LED_BLUE_SetHigh();
+        sprintf(strbuf, "INIT FAIL %0X %s %s\n", ina219_state, INA219_ERROR_get_message(), INA219_ERROR_get_operation());
+    }
+    buflen = strlen((char *)strbuf);
+    write_data((uint8_t *)strbuf, buflen);
+    
     RTC_SetOVFIsrCallback(tick);
-    RTC_Start();  
+    RTC_Start();      
     
     uint8_t data;
-    
-    LED_BLUE_SetHigh();
-    
     struct ina219_data readings;
-//    uint8_t vshunt[2];
-//    uint8_t vbus[2];
-//    uint8_t current[2];
-//    uint8_t power[2];
     
     while(1)
     {
        if(tock){
             if( USART0_IsRxReady() ) {
                 data = USART0_Read();
-                LED_GREEN_Toggle();
-                LED_BLUE_SetLow();
                 
                 while(!USART0_IsTxReady()){}
                 USART0_Write(data|0x80);
 
-                char strbuf[20];
-                uint8_t buflen;
-                readings = INA219_getReadings();
-#ifdef IN_HEX
-                sprintf(strbuf, "%04X", readings.raw_shunt_voltage);
-                buflen = strlen((char *)strbuf);
-                USART0_Write(0x01);
-                write_data((uint8_t *)strbuf, buflen);
-                USART0_Write(0x00);
+                INA219_ERROR_set(INA219_ERROR_NONE);
+               if (INA219_getReadings( &readings )){    
+                    LED_GREEN_SetHigh();
+                    LED_BLUE_SetLow();
 
-                sprintf(strbuf, "%04X", readings.raw_bus_voltage);
-                buflen = strlen((char *)strbuf);
-                USART0_Write(0x02);
-                write_data((uint8_t *)strbuf, buflen);
-                USART0_Write(0x00);
+                    sprintf(strbuf, "SHUNT %0X4 %5.2f ", readings.raw_shunt_voltage, readings.shunt_voltage);
+                    buflen = strlen((char *)strbuf);
+                    write_data((uint8_t *)strbuf, buflen);
+                    sprintf(strbuf, "BUS %0X4 %5.2f ", readings.raw_bus_voltage, readings.bus_voltage);
+                    buflen = strlen((char *)strbuf);
+                    write_data((uint8_t *)strbuf, buflen);
 
-                sprintf(strbuf, "%04X", readings.raw_current);
-                buflen = strlen((char *)strbuf);
-                USART0_Write(0x03);
-                write_data((uint8_t *)strbuf, buflen);
-                USART0_Write(0x00);
-#else
-                sprintf(strbuf, "%5.2f", readings.shunt_voltage);
-                buflen = strlen((char *)strbuf);
-                USART0_Write(0x01);
-                write_data((uint8_t *)strbuf, buflen);
-                USART0_Write(0x00);
+                    sprintf(strbuf, "CURRENT %0X4 %5.2f ", readings.raw_current, readings.current);
+                    buflen = strlen((char *)strbuf);
+                    write_data((uint8_t *)strbuf, buflen);
 
-                sprintf(strbuf, "%5.2f", readings.bus_voltage);
-                buflen = strlen((char *)strbuf);
-                USART0_Write(0x02);
-                write_data((uint8_t *)strbuf, buflen);
-                USART0_Write(0x00);
-
-                sprintf(strbuf, "%5.2f", readings.current);
-                buflen = strlen((char *)strbuf);
-                USART0_Write(0x03);
-                write_data((uint8_t *)strbuf, buflen);
-                USART0_Write(0x00);
-
-                sprintf(strbuf, "%5.2f", readings.power);
-                buflen = strlen((char *)strbuf);
-                USART0_Write(0x04);
-                write_data((uint8_t *)strbuf, buflen);
-                USART0_Write(0x00);
-#endif                
-                USART0_Write(0xFE);
-                
-                
+                    sprintf(strbuf, "POWER %0X4 %5.2f\n", readings.raw_power, readings.power);
+                    buflen = strlen((char *)strbuf);
+                    write_data((uint8_t *)strbuf, buflen);
+                } else {
+                    LED_GREEN_SetLow();
+                    LED_BLUE_SetHigh();
+                    ina219_state = INA219_ERROR_get();        
+                    sprintf(strbuf, "ERROR %0X %s %s\n", ina219_state, INA219_ERROR_get_operation(), INA219_ERROR_get_message());
+                    buflen = strlen((char *)strbuf);
+                    write_data((uint8_t *)strbuf, buflen);
+                }
             }
             LED_RED_Toggle();                
             tock = false;

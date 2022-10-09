@@ -13,6 +13,7 @@ extern "C" {
 #endif
 
 #include "mcc_generated_files/system/system.h"
+#include "ina219_error.h"
 
 #define INA219_RST 15
 #define INA219_BRNG 13
@@ -73,23 +74,23 @@ extern "C" {
 #define INA219_ADDR_SCL_VS     0b01001101
 #define INA219_ADDR_SCL_SDA    0b01001110
 #define INA219_ADDR_SCL_SCL    0b01001111
-    
-    
-    struct ina219_data {
-        uint16_t raw_shunt_voltage;
-        uint16_t raw_bus_voltage;
-        uint16_t raw_current;
-        uint16_t raw_power;
-        
-        float shunt_voltage;
-        float bus_voltage;
-        float power;
-        float current;
-    };
-    
-    void INA219_Initialise(uint8_t addr);
-    
-    struct ina219_data INA219_getReadings();
+   
+
+struct ina219_data {
+    uint16_t raw_shunt_voltage;
+    uint16_t raw_bus_voltage;
+    uint16_t raw_current;
+    uint16_t raw_power;
+
+    float shunt_voltage;
+    float bus_voltage;
+    float power;
+    float current;
+};
+
+bool INA219_Initialise(uint8_t addr);
+
+bool  INA219_getReadings(struct ina219_data *readings);
     
 #ifdef	__cplusplus
 }

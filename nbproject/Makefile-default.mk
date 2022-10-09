@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=mcc_generated_files/i2c_host/src/twi0.c mcc_generated_files/system/src/interrupt.c mcc_generated_files/system/src/clock.c mcc_generated_files/system/src/config_bits.c mcc_generated_files/system/src/pins.c mcc_generated_files/system/src/system.c mcc_generated_files/system/src/protected_io.S mcc_generated_files/timer/src/rtc.c mcc_generated_files/uart/src/usart0.c main.c INA219.c
+SOURCEFILES_QUOTED_IF_SPACED=mcc_generated_files/i2c_host/src/twi0.c mcc_generated_files/system/src/interrupt.c mcc_generated_files/system/src/clock.c mcc_generated_files/system/src/config_bits.c mcc_generated_files/system/src/pins.c mcc_generated_files/system/src/system.c mcc_generated_files/system/src/protected_io.S mcc_generated_files/timer/src/rtc.c mcc_generated_files/uart/src/usart0.c main.c INA219.c ina219_error.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/mcc_generated_files/i2c_host/src/twi0.o ${OBJECTDIR}/mcc_generated_files/system/src/interrupt.o ${OBJECTDIR}/mcc_generated_files/system/src/clock.o ${OBJECTDIR}/mcc_generated_files/system/src/config_bits.o ${OBJECTDIR}/mcc_generated_files/system/src/pins.o ${OBJECTDIR}/mcc_generated_files/system/src/system.o ${OBJECTDIR}/mcc_generated_files/system/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/timer/src/rtc.o ${OBJECTDIR}/mcc_generated_files/uart/src/usart0.o ${OBJECTDIR}/main.o ${OBJECTDIR}/INA219.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/mcc_generated_files/i2c_host/src/twi0.o.d ${OBJECTDIR}/mcc_generated_files/system/src/interrupt.o.d ${OBJECTDIR}/mcc_generated_files/system/src/clock.o.d ${OBJECTDIR}/mcc_generated_files/system/src/config_bits.o.d ${OBJECTDIR}/mcc_generated_files/system/src/pins.o.d ${OBJECTDIR}/mcc_generated_files/system/src/system.o.d ${OBJECTDIR}/mcc_generated_files/system/src/protected_io.o.d ${OBJECTDIR}/mcc_generated_files/timer/src/rtc.o.d ${OBJECTDIR}/mcc_generated_files/uart/src/usart0.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/INA219.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/mcc_generated_files/i2c_host/src/twi0.o ${OBJECTDIR}/mcc_generated_files/system/src/interrupt.o ${OBJECTDIR}/mcc_generated_files/system/src/clock.o ${OBJECTDIR}/mcc_generated_files/system/src/config_bits.o ${OBJECTDIR}/mcc_generated_files/system/src/pins.o ${OBJECTDIR}/mcc_generated_files/system/src/system.o ${OBJECTDIR}/mcc_generated_files/system/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/timer/src/rtc.o ${OBJECTDIR}/mcc_generated_files/uart/src/usart0.o ${OBJECTDIR}/main.o ${OBJECTDIR}/INA219.o ${OBJECTDIR}/ina219_error.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/mcc_generated_files/i2c_host/src/twi0.o.d ${OBJECTDIR}/mcc_generated_files/system/src/interrupt.o.d ${OBJECTDIR}/mcc_generated_files/system/src/clock.o.d ${OBJECTDIR}/mcc_generated_files/system/src/config_bits.o.d ${OBJECTDIR}/mcc_generated_files/system/src/pins.o.d ${OBJECTDIR}/mcc_generated_files/system/src/system.o.d ${OBJECTDIR}/mcc_generated_files/system/src/protected_io.o.d ${OBJECTDIR}/mcc_generated_files/timer/src/rtc.o.d ${OBJECTDIR}/mcc_generated_files/uart/src/usart0.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/INA219.o.d ${OBJECTDIR}/ina219_error.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/mcc_generated_files/i2c_host/src/twi0.o ${OBJECTDIR}/mcc_generated_files/system/src/interrupt.o ${OBJECTDIR}/mcc_generated_files/system/src/clock.o ${OBJECTDIR}/mcc_generated_files/system/src/config_bits.o ${OBJECTDIR}/mcc_generated_files/system/src/pins.o ${OBJECTDIR}/mcc_generated_files/system/src/system.o ${OBJECTDIR}/mcc_generated_files/system/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/timer/src/rtc.o ${OBJECTDIR}/mcc_generated_files/uart/src/usart0.o ${OBJECTDIR}/main.o ${OBJECTDIR}/INA219.o
+OBJECTFILES=${OBJECTDIR}/mcc_generated_files/i2c_host/src/twi0.o ${OBJECTDIR}/mcc_generated_files/system/src/interrupt.o ${OBJECTDIR}/mcc_generated_files/system/src/clock.o ${OBJECTDIR}/mcc_generated_files/system/src/config_bits.o ${OBJECTDIR}/mcc_generated_files/system/src/pins.o ${OBJECTDIR}/mcc_generated_files/system/src/system.o ${OBJECTDIR}/mcc_generated_files/system/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/timer/src/rtc.o ${OBJECTDIR}/mcc_generated_files/uart/src/usart0.o ${OBJECTDIR}/main.o ${OBJECTDIR}/INA219.o ${OBJECTDIR}/ina219_error.o
 
 # Source Files
-SOURCEFILES=mcc_generated_files/i2c_host/src/twi0.c mcc_generated_files/system/src/interrupt.c mcc_generated_files/system/src/clock.c mcc_generated_files/system/src/config_bits.c mcc_generated_files/system/src/pins.c mcc_generated_files/system/src/system.c mcc_generated_files/system/src/protected_io.S mcc_generated_files/timer/src/rtc.c mcc_generated_files/uart/src/usart0.c main.c INA219.c
+SOURCEFILES=mcc_generated_files/i2c_host/src/twi0.c mcc_generated_files/system/src/interrupt.c mcc_generated_files/system/src/clock.c mcc_generated_files/system/src/config_bits.c mcc_generated_files/system/src/pins.c mcc_generated_files/system/src/system.c mcc_generated_files/system/src/protected_io.S mcc_generated_files/timer/src/rtc.c mcc_generated_files/uart/src/usart0.c main.c INA219.c ina219_error.c
 
 
 
@@ -154,6 +154,12 @@ ${OBJECTDIR}/INA219.o: INA219.c  .generated_files/flags/default/5f89e215519b647d
 	@${RM} ${OBJECTDIR}/INA219.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG  -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/INA219.o.d" -MT "${OBJECTDIR}/INA219.o.d" -MT ${OBJECTDIR}/INA219.o -o ${OBJECTDIR}/INA219.o INA219.c 
 	
+${OBJECTDIR}/ina219_error.o: ina219_error.c  .generated_files/flags/default/f1c79dccc0b65f3ece905c06851b0f7814474af0 .generated_files/flags/default/e8600182041f9facf3cc7fa3f69558ca0fab6f86
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ina219_error.o.d 
+	@${RM} ${OBJECTDIR}/ina219_error.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG  -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/ina219_error.o.d" -MT "${OBJECTDIR}/ina219_error.o.d" -MT ${OBJECTDIR}/ina219_error.o -o ${OBJECTDIR}/ina219_error.o ina219_error.c 
+	
 else
 ${OBJECTDIR}/mcc_generated_files/i2c_host/src/twi0.o: mcc_generated_files/i2c_host/src/twi0.c  .generated_files/flags/default/fc57eba614e8553c5765d8c00746dacd1f76065b .generated_files/flags/default/e8600182041f9facf3cc7fa3f69558ca0fab6f86
 	@${MKDIR} "${OBJECTDIR}/mcc_generated_files/i2c_host/src" 
@@ -214,6 +220,12 @@ ${OBJECTDIR}/INA219.o: INA219.c  .generated_files/flags/default/1fc37de2f69ddf9f
 	@${RM} ${OBJECTDIR}/INA219.o.d 
 	@${RM} ${OBJECTDIR}/INA219.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/INA219.o.d" -MT "${OBJECTDIR}/INA219.o.d" -MT ${OBJECTDIR}/INA219.o -o ${OBJECTDIR}/INA219.o INA219.c 
+	
+${OBJECTDIR}/ina219_error.o: ina219_error.c  .generated_files/flags/default/7ba8a8f1bfec07e8ce6efdfb56a51b653c469a42 .generated_files/flags/default/e8600182041f9facf3cc7fa3f69558ca0fab6f86
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ina219_error.o.d 
+	@${RM} ${OBJECTDIR}/ina219_error.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/ina219_error.o.d" -MT "${OBJECTDIR}/ina219_error.o.d" -MT ${OBJECTDIR}/ina219_error.o -o ${OBJECTDIR}/ina219_error.o ina219_error.c 
 	
 endif
 
