@@ -105,18 +105,18 @@ int main(void)
                     LED_GREEN_SetHigh();
                     LED_BLUE_SetLow();
 
-                    sprintf(strbuf, "SHUNT %0X4 %5.2f ", readings.raw_shunt_voltage, readings.shunt_voltage);
+                    sprintf(strbuf, "SHUNT %04X %5.2f ", readings.raw_shunt_voltage, readings.shunt_voltage);
                     buflen = strlen((char *)strbuf);
                     write_data((uint8_t *)strbuf, buflen);
-                    sprintf(strbuf, "BUS %0X4 %5.2f ", readings.raw_bus_voltage, readings.bus_voltage);
-                    buflen = strlen((char *)strbuf);
-                    write_data((uint8_t *)strbuf, buflen);
-
-                    sprintf(strbuf, "CURRENT %0X4 %5.2f ", readings.raw_current, readings.current);
+                    sprintf(strbuf, "BUS %04X %5.2f ", readings.raw_bus_voltage, readings.bus_voltage);
                     buflen = strlen((char *)strbuf);
                     write_data((uint8_t *)strbuf, buflen);
 
-                    sprintf(strbuf, "POWER %0X4 %5.2f\n", readings.raw_power, readings.power);
+                    sprintf(strbuf, "CURRENT %04X %5.2f ", readings.raw_current, readings.current);
+                    buflen = strlen((char *)strbuf);
+                    write_data((uint8_t *)strbuf, buflen);
+
+                    sprintf(strbuf, "POWER %04X %5.2f\n", readings.raw_power, readings.power);
                     buflen = strlen((char *)strbuf);
                     write_data((uint8_t *)strbuf, buflen);
                 } else {

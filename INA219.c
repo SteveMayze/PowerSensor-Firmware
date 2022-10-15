@@ -73,55 +73,48 @@ bool INA219_set_calibration(){
 }
 
 bool INA219_Initialise(uint8_t addr) {
-    INA219_ERROR_set_operation(INA219_INITIALIZE);
     iic_address = addr;
+
+    INA219_ERROR_set_operation(INA219_INITIALIZE_CALIBRATE);
+    if(!INA219_set_calibration())
+        return false;
+
+    INA219_ERROR_set_operation(INA219_INITIALIZE);
+    
+    _delay_ms(1000);
 
     write_buffer[0] = INA219_CFG;
     write_buffer[1] = INA219_DEFAULT_CFG >> 8;
     write_buffer[2] = 0xFF & INA219_DEFAULT_CFG;
-    if(TWI0_Write(iic_address, write_buffer, 3))
-    {        
-        return true;
-    }
-
+    TWI0_Write(iic_address, write_buffer, 3);
     // Confirm write operation completed and check for error
     if(!TWI0_IsBusy())
     {
-        if ( TWI0_ErrorGet() == I2C_ERROR_NONE)
-        {
-            return true;
-        }
-        else
-        {
-            i2c_host_error_t error_state = TWI0_ErrorGet();
-            switch(error_state){
-                case(I2C_ERROR_NONE):
-                    return true;
-                    break;
-                case(I2C_ERROR_ADDR_NACK):
-                    INA219_ERROR_set(INA219_I2C_ERROR_ADDR_NACK);
-                    return false;
-                    break;
-                case(I2C_ERROR_DATA_NACK):
-                    INA219_ERROR_set(INA219_I2C_ERROR_DATA_NACK);
-                    return false;
-                    break;
-                case(I2C_ERROR_BUS_COLLISION):
-                    INA219_ERROR_set(INA219_I2C_ERROR_BUS_COLLISION);
-                    return false;
-                    break;
-                default:
-                    INA219_ERROR_set(INA219_UNKOWN);
-                    return false;
-            }
+        i2c_host_error_t error_state = TWI0_ErrorGet();
+        switch(error_state){
+            case(I2C_ERROR_NONE):
+                // return true;
+                break;
+            case(I2C_ERROR_ADDR_NACK):
+                INA219_ERROR_set(INA219_I2C_ERROR_ADDR_NACK);
+                return false;
+                break;
+            case(I2C_ERROR_DATA_NACK):
+                INA219_ERROR_set(INA219_I2C_ERROR_DATA_NACK);
+                return false;
+                break;
+            case(I2C_ERROR_BUS_COLLISION):
+                INA219_ERROR_set(INA219_I2C_ERROR_BUS_COLLISION);
+                return false;
+                break;
+            default:
+                INA219_ERROR_set(INA219_UNKOWN);
+                return false;
         }
     } else {
             INA219_ERROR_set(INA219_IC2_BUSY);
             return false;
-    }    
-    INA219_ERROR_set_operation(INA219_INITIALIZE_CALIBRATE);
-    if(!INA219_set_calibration())
-        return false;
+    } 
     return true;
 }
 

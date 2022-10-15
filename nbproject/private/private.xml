@@ -8,11 +8,12 @@
             <file>file:/Users/steve/MPLABXProjects/PowerSensor-Firmware/mcc_generated_files/uart/src/usart0.c</file>
         </group>
         <group name="Leawood_FieldDevice_R3">
+            <file>file:/D:/pcbs/Leawood/PowerSensor-Firmware/mcc_generated_files/i2c_host/src/twi0.c</file>
             <file>file:/D:/pcbs/Leawood/PowerSensor-Firmware/main.c</file>
+            <file>file:/D:/pcbs/Leawood/PowerSensor-Firmware/mcc_generated_files/i2c_host/i2c_host_types.h</file>
             <file>file:/D:/pcbs/Leawood/PowerSensor-Firmware/INA219.c</file>
             <file>file:/D:/pcbs/Leawood/PowerSensor-Firmware/ina219_error.h</file>
             <file>file:/D:/pcbs/Leawood/PowerSensor-Firmware/ina219_error.c</file>
-            <file>file:/D:/pcbs/Leawood/PowerSensor-Firmware/INA219.h</file>
         </group>
     </open-files>
 </project-private>
